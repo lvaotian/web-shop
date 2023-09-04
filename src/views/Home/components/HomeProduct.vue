@@ -2,41 +2,34 @@
 import HomePanel from './HomePanel.vue'
 import { getGoodsAPI } from '@/apis/home'
 import { onMounted, ref } from 'vue'
+import GoodsItem from './GoodsItem.vue'
+// 获取数据列表
 const goodsProduct = ref([])
 const getGoods = async () => {
-  const { result } = await getGoodsAPI()
-  goodsProduct.value = result
+  const res = await getGoodsAPI()
+  goodsProduct.value = res.result
 }
-onMounted( ()=> getGoods() )
+onMounted(() => getGoods())
 </script>
 
 <template>
   <div class="home-product">
-<div class="home-product">
-  <HomePanel :title="cate.name" v-for="cate in goodsProduct" :key="cate.id">
-    <div class="box">
-      <RouterLink class="cover" to="/">
-        <!-- 指令替换 -->
-        <img v-img-lazy="cate.picture" />
-        <strong class="label">
+    <HomePanel :title="cate.name" v-for="cate in goodsProduct" :key="cate.id">
+      <div class="box">
+        <RouterLink class="cover" to="/">
+          <img v-img-lazy="cate.picture" />
+          <strong class="label">
             <span>{{ cate.name }}馆</span>
             <span>{{ cate.saleInfo }}</span>
           </strong>
-      </RouterLink>
-      <ul class="goods-list">
-        <li v-for="goods in cate.goods" :key="goods.id">
-          <RouterLink to="/" class="goods-item">
-             <!-- 指令替换 -->
-            <img v-img-lazy="goods.picture" alt="" />
-            <p class="name ellipsis">{{ goods.name }}</p>
-            <p class="desc ellipsis">{{ goods.desc }}</p>
-            <p class="price">&yen;{{ goods.price }}</p>
-          </RouterLink>
-        </li>
-      </ul>
-    </div>
-  </HomePanel>
-</div>
+        </RouterLink>
+        <ul class="goods-list">
+          <li v-for="goods in cate.goods" :key="goods.id">
+            <GoodsItem :goods="goods" />
+          </li>
+        </ul>
+      </div>
+    </HomePanel>
   </div>
 </template>
 
