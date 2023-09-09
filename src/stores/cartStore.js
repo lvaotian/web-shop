@@ -94,7 +94,8 @@ const selectedPrice = computed(() => cartList.value.filter(item => item.selected
     isAll,
     selectedCount,
     selectedPrice,
-    clearCart
+    clearCart,
+    updateNewList
   }
 }, {
   persist: true,
