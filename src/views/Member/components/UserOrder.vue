@@ -30,6 +30,12 @@ const tabChange = (type) => {
   params.value.orderState = type
   getOrderList()
 }
+
+// 页数切换
+const pageChange = (page) => {
+  params.value.page = page
+  getOrderList()
+}
 </script>
 
 <template>
