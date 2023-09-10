@@ -23,9 +23,13 @@ const getOrderList = async () => {
   const res = await getUserOrder(params.value)
   orderList.value = res.result.items
 }
-
 onMounted(() => getOrderList())
 
+// tab切换
+const tabChange = (type) => {
+  params.value.orderState = type
+  getOrderList()
+}
 </script>
 
 <template>
